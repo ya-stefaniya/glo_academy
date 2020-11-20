@@ -1,4 +1,4 @@
-const money = 900; 
+const money = 990; 
 const income = '200'; 
 const addExpenses = 'аренда, интернет, пиво, кошачий корм'; 
 const deposit = true; 
