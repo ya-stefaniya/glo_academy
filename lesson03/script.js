@@ -1,7 +1,7 @@
 'use strict'
 
 
-const money = 60000; 
+let money = 900; 
 const income = '200'; 
 const addExpenses = 'аренда, интернет, пиво, кошачий корм'; 
 let deposit = true; 
@@ -17,15 +17,15 @@ console.log(`Период равен ${period} месяцев`);
 console.log(`Цель - заработать ${mission}$`);
 console.log(addExpenses.toLowerCase().split(', '));
 
-let monthIncome, amount1, amount2;
+let amount1, amount2;
 //делаю проверку на число, т.к. Максим в видео к уроку говорил о такой проверке
 //я не придумала, как можно объеденить все проверку в одну, буду рада подсказке
 do {
-    monthIncome = prompt('Ваш месячный доход?', '');
-    if (monthIncome === '' || isNaN(monthIncome)) {
+    money = prompt('Ваш месячный доход?', '');
+    if (money === '' || isNaN(money)) {
     alert('Было введено не число, попробуйте еще раз');
     }
-} while (isNaN(monthIncome));
+} while (isNaN(money));
 
 
 let possibleExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
@@ -48,7 +48,7 @@ do {
     }
 } while (isNaN(amount2));
 
-let budgetMonth = +monthIncome - (parseFloat(amount1) + parseFloat(amount2));
+let budgetMonth = +money - (parseFloat(amount1) + parseFloat(amount2));
 console.log('Ваш бюджет на месяц: ', budgetMonth);
 
 console.log(`Цель будет достигнута через ${Math.ceil(mission/budgetMonth)} месяцев`);
