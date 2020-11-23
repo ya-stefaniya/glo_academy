@@ -42,14 +42,14 @@ do {
     
 let expenses2 = prompt('Введите еще одну обязательную статью расходов.');
 do {
-    amount2 = prompt('А это во сколько это обойдется?', '');
+    amount2 = prompt('А это во сколько обойдется?', '');
     if (amount2 === '' || isNaN(amount2)) {
     alert('Было введено не число, попробуйте еще раз');
     }
 } while (isNaN(amount2));
 
 let budgetMonth = +monthIncome - (parseFloat(amount1) + parseFloat(amount2));
-console.log('budgetMonth: ', budgetMonth);
+console.log('Ваш бюджет на месяц: ', budgetMonth);
 
 console.log(`Цель будет достигнута через ${Math.ceil(mission/budgetMonth)} месяцев`);
 
