@@ -3,7 +3,7 @@
 
 let money = 900; 
 const income = '200'; 
-const addExpenses = 'аренда, интернет, пиво, кошачий корм'; 
+let addExpenses = 'аренда, интернет, пиво, кошачий корм'; 
 let deposit = true; 
 const mission = 2000000; 
 const period = 12;
@@ -15,7 +15,7 @@ console.log(typeof(deposit));
 console.log(addExpenses.length);
 console.log(`Период равен ${period} месяцев`);
 console.log(`Цель - заработать ${mission}$`);
-console.log(addExpenses.toLowerCase().split(', '));
+
 
 let amount1, amount2;
 //делаю проверку на число, т.к. Максим в видео к уроку говорил о такой проверке
@@ -28,7 +28,8 @@ do {
 } while (isNaN(money));
 
 
-let possibleExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
+addExpenses = prompt('Перечислите возможные расходы за рассчитываемый период через запятую.');
+console.log(addExpenses.toLowerCase().split(', '));
 deposit = confirm('Есть ли у вас депозит в банке?');
 
 let expenses1 = prompt('Введите обязательную статью расходов.');
