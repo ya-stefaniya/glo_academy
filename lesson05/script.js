@@ -1,6 +1,6 @@
 'use strict'
 let isNumber = function (n){
-    return !isNaN(parseFloat(n) && isFinite(n))
+    return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
 let money = 900; 
@@ -21,7 +21,7 @@ showTypeoOf(deposit);
 
 let start = function(){
     do {
-        money = prompt('Ваш месячный доход?', '');
+        money = +prompt('Ваш месячный доход?', '');
     } while (!isNumber(money));
 };
 start();
@@ -35,9 +35,10 @@ let getExpensesMonth = function(){
     let sum = 0;
 
     for (let i=0; i<2; i++){
+        
         expenses = prompt('Введите обязательную статью расходов.');
         do {
-        sum += +prompt('Во сколько обойдется?', '');
+        sum ? sum = sum + +prompt('Во сколько обойдется?', '') : sum = +prompt('Во сколько обойдется?', '');
         }
         while(!isNumber(sum));
     }
@@ -80,3 +81,4 @@ let getStatusIncome = function(){
  }
 
  getStatusIncome();
+ 
