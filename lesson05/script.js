@@ -79,6 +79,4 @@ let getStatusIncome = function(){
         console.log('У вас средний уровень дохода');
     } else  console.log('Что-то пошло не так');
  }
-
  getStatusIncome();
- 
