@@ -8,27 +8,17 @@ console.log(newArray);
 
 //task2
 
-function isPrime(num) {
-    for ( var i = 2; i < num; i++ ) {
-        if ( num % i === 0 ) {
-            return false;
+
+for (let i = 0; i <= 100; i++) {
+    let isPrime = true;
+    for (var j = 2; j <= i; j++) {
+        if (i%j===0 && j!==i) {
+            isPrime = false;
         }
     }
-    return true;
-}
-
-function display(n) {
-    var arr = [2];
-    let prime;
-    for ( var i = 3; i < n; i+=2 ) {
-        prime = i;
-        if ( isPrime(i) ) {
-            arr.push(i);
-        }
+    if (isPrime === true) {
+        console.log(`${i} делится на 1 и ${i}`);
     }
-    let newArr = arr.join(' делится на 1"\r\n"');
-    //let newArr2 = newArr.join('\r\n');
-    console.log(newArr); 
 }
 
-display(100);
+
