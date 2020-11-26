@@ -25,7 +25,7 @@ function guessNumber(){
         } else {
             if (+answer !== n) {
                 counter--;
-                +answer < n ? alert('Загаданное число больше'): alert('Загаданное число меньше');
+                +answer < n ? alert(`Загаданное число больше, у вас ${counter} попыток.`): alert(`Загаданное число меньше, у вас ${counter} попыток.`);
                 if (counter === 0) {
                     if (confirm('Game over! Хотели бы сыграть еще?')){
                         guessNumber()
