@@ -3,17 +3,19 @@ let isNumber = function (n){
 };
 function guessNumber(){
     let n = Math.floor(Math.random() * 100);
+    let counter = 10;
+    console.log('counter: ', counter);
     console.log('n: ', n);
     function checkNumber(n){
         let answer, check, сounter;
-        answer = prompt('Угадай число от 1 до 100', '');
-        //нажимает отмена сразу
+        answer = prompt( `Угадай число от 1 до 100, у вас ${counter} попыток`, '');
+        //нажимает отмену сразу
         if (answer === null){
             alert('Игра окончена!')
-        //вводим буква или пробел
+        //вводим букву или пробел
         } else if (!isNumber(answer) || answer.trim()===''){
             check = confirm('Введи число!');
-            //нажимает ок -> продлолжаем
+            //нажимает ок -> продолжаем
             if (check){
                 checkNumber(n);
             //нажимаем отмена
@@ -22,10 +24,20 @@ function guessNumber(){
             }
         } else {
             if (+answer !== n) {
+                counter--;
                 +answer < n ? alert('Загаданное число больше'): alert('Загаданное число меньше');
-                checkNumber(n);
+                if (counter === 0) {
+                    if (confirm('Game over! Хотели бы сыграть еще?')){
+                        guessNumber()
+                    } else return ; 
+                    
+                } else {
+                    checkNumber(n);
+                
+                }
             } else {
-                alert('Поздравляю, Вы угадали!!!');
+                confirm('Поздравляю, Вы угадали!!! Хотели бы сыграть еще?');
+                if (confirm ) guessNumber();
             }
         }
     }
