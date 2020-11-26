@@ -4,9 +4,9 @@ let isNumber = function (n){
 function guessNumber(){
     let n = Math.floor(Math.random() * 100);
     let counter = 10;
-    console.log('counter: ', counter);
     console.log('n: ', n);
     function checkNumber(n){
+        console.log('counter: ', counter);
         let answer, check, сounter;
         answer = prompt( `Угадай число от 1 до 100, у вас ${counter} попыток`, '');
         //нажимает отмену сразу
