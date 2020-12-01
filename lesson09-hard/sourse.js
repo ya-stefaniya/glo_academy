@@ -31,7 +31,7 @@ showTime = () => {
         secondDigit = (sec.toString()[1]) ? (sec.toString()[1]) : sec.toString();
 
 
-        // в зависимости от цифры назачначаем слово
+        // в зависимости от цифры назчначаем слово
         if (hourDigit === '1'){
             hourWord = 'час';
         } else if (hourDigit >=2 && hourDigit < 5){
@@ -56,8 +56,8 @@ showTime = () => {
     //'04.02.2020 - 21:05:33' 
     shortdate.innerHTML = `${addZero(monthNumber)}.${addZero(day)}.${year} - ${hour}:${addZero(min)}:${addZero(sec)}`
 }
-//Add zero
 
+//Add zero
 addZero = n =>{
     return (parseInt(n, 10) < 10  ? '0' : '') + n;
 }
