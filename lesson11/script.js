@@ -181,7 +181,6 @@ let appData ={
     }
 };
 appData.showPeriod();
-
 calculateResult.addEventListener('click', ()=>{
     if(salaryAmount.value === ''){
         calculateResult.disabled ? calculateResult.disabled : !calculateResult.disabled;
@@ -191,8 +190,7 @@ calculateResult.addEventListener('click', ()=>{
 
     }
 });
-//console.log(calculateResult.disabled);
-//calculateResult.addEventListener('click', appData.start);
+
 addExpenceButton.addEventListener('click', appData.addExpensesBlock);
 addIncomeButton.addEventListener('click', appData.addIncomesBlock);
 
