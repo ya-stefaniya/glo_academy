@@ -54,11 +54,8 @@ let appData ={
     expensesMonth: 0,
     start:function(){
         //если нет данных в поле Месячный доход
-        if(salaryAmount.value === ''){
-            calculateResult.disabled = true;
-            return;
-        } else{
-            calculateResult.disabled = false;
+        
+        
             appData.budget = +salaryAmount.value;
             appData.getExpenses();
             appData.getIncomes();
@@ -68,7 +65,7 @@ let appData ={
             appData.getAddExpenses();
             appData.getAddIncome();
             appData.showResult();
-        };
+      
     },
     showResult: function(){
         budgetMonthValue.value = appData.budgetMonth;
@@ -184,7 +181,18 @@ let appData ={
     }
 };
 appData.showPeriod();
-calculateResult.addEventListener('click', appData.start);
+
+calculateResult.addEventListener('click', ()=>{
+    if(salaryAmount.value === ''){
+        (calculateResult.disabled) ? calculateResult.disabled = true : calculateResult.disabled = false;
+    } else {
+        (calculateResult.disabled) ? calculateResult.disabled = false : calculateResult.disabled;
+        appData.start();
+
+    }
+});
+//console.log(calculateResult.disabled);
+//calculateResult.addEventListener('click', appData.start);
 addExpenceButton.addEventListener('click', appData.addExpensesBlock);
 addIncomeButton.addEventListener('click', appData.addIncomesBlock);
 
