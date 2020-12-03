@@ -184,9 +184,9 @@ appData.showPeriod();
 
 calculateResult.addEventListener('click', ()=>{
     if(salaryAmount.value === ''){
-        (calculateResult.disabled) ? calculateResult.disabled = true : calculateResult.disabled = false;
+        calculateResult.disabled ? calculateResult.disabled : !calculateResult.disabled;
     } else {
-        (calculateResult.disabled) ? calculateResult.disabled = false : calculateResult.disabled;
+        calculateResult.disabled ? !calculateResult.disabled: calculateResult.disabled;
         appData.start();
 
     }
