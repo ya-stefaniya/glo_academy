@@ -30,8 +30,10 @@ let calculateResult = document.getElementById('start'),
     depositAmount = document.querySelector('.deposit-amount'),
     depositPercent = document.querySelector('.deposit-percent'),
     periodSelect = document.querySelector('.period-select'),
-    periodAmount = document.querySelector('.period-amount');
+    periodAmount = document.querySelector('.period-amount'),
 
+    nameInput = document.querySelectorAll('[placeholder="Наименование"]'),
+    sumInput = document.querySelectorAll('[placeholder="Сумма"]');
 
 
 let isNumber = function (n){
@@ -53,19 +55,16 @@ let appData ={
     budgetMonth: 0,
     expensesMonth: 0,
     start:function(){
-        //если нет данных в поле Месячный доход
-        
-        
-            appData.budget = +salaryAmount.value;
-            appData.getExpenses();
-            appData.getIncomes();
-    
-            appData.getExpensesMonth();
-            appData.getBudget();
-            appData.getAddExpenses();
-            appData.getAddIncome();
-            appData.showResult();
-      
+        appData.budget = +salaryAmount.value;
+        appData.getExpenses();
+        appData.getIncomes();
+
+        appData.getExpensesMonth();
+        appData.getBudget();
+        appData.getAddExpenses();
+        appData.getAddIncome();
+        // функция-обертка для проверки валидности
+        appData.validateInnput(appData.showResult);
     },
     showResult: function(){
         budgetMonthValue.value = appData.budgetMonth;
@@ -74,15 +73,17 @@ let appData ={
         additionalExpensesValue.value = appData.addExpenses.join(', ');
         additionalIncomeValue.value = appData.addIncome.join(', ');
         targetMonthValue.value = Math.ceil(appData.getTargetMonth());
-        console.log('targetMonthValue.value: ', targetMonthValue.value);
         incomePeriodValue.value = appData.calcSavedMoney();
         periodSelect.addEventListener('input', ()=>{
             incomePeriodValue.value = appData.calcSavedMoney();
         });     
-     
     },
     addExpensesBlock: function(){
         let cloneExpensesItems = expensesItems[0].cloneNode(true);
+        let elems = cloneExpensesItems.childNodes;
+        elems.forEach.call(elems, function(elem) {
+            elem.value = ''; 
+        });
         expensesItems[0].parentNode.insertBefore(cloneExpensesItems, addExpenceButton);
         expensesItems = document.querySelectorAll('.expenses-items');
         if(expensesItems.length === 3){
@@ -91,11 +92,11 @@ let appData ={
     },
     getExpenses: function(){
         expensesItems.forEach(function(item){
-           let itemExpenses = item.querySelector('.expenses-title').value;
-           let cashExpenses = item.querySelector('.expenses-amount').value;
-           if(itemExpenses !== '' && cashExpenses !== ''){
-               appData.expenses[itemExpenses] = +cashExpenses;
-           }
+            let itemExpenses = item.querySelector('.expenses-title').value;
+            let cashExpenses = item.querySelector('.expenses-amount').value;
+            if(itemExpenses !== '' && cashExpenses !== '' && isNumber(cashExpenses)){
+                appData.expenses[itemExpenses] = +cashExpenses;
+            }
         });
     },
     getAddExpenses: function(){
@@ -110,6 +111,10 @@ let appData ={
     addIncomesBlock: function(){
         let cloneIncomeItems = incomeItems[0].cloneNode(true);
         incomeItems[0].parentNode.insertBefore(cloneIncomeItems, addIncomeButton);
+        let elems = cloneIncomeItems.childNodes;
+        elems.forEach.call(elems, function(elem) {
+            elem.value = ''; 
+        });
         incomeItems = document.querySelectorAll('.income-items');
         if(incomeItems.length === 3){
             addIncomeButton.style.display = 'none';
@@ -117,15 +122,14 @@ let appData ={
     },
     getIncomes: function(){
         incomeItems.forEach(function(item){
-           let itemIncomes = item.querySelector('.income-title').value;
-           let cashIncomes = item.querySelector('.income-amount').value;
-           if(itemIncomes !== '' && cashIncomes !== ''){
-               appData.income[itemIncomes] = +cashIncomes;
-           }
+            let itemIncomes = item.querySelector('.income-title').value;
+            let cashIncomes = item.querySelector('.income-amount').value;
+            if(itemIncomes !== '' && cashIncomes !== '' && isNumber(cashIncomes)){
+                appData.income[itemIncomes] = +cashIncomes;
+            }
         });
         for(let key in appData.income){
-         appData.incomeMonth += +appData.income[key];
-         
+        appData.incomeMonth += +appData.income[key];
         }
     },
     getAddIncome: function(){
@@ -149,7 +153,7 @@ let appData ={
         appData.budgetDay = Math.floor(appData.budgetMonth/30);
     },
     getTargetMonth: function (){
-       return targetAmount.value/appData.budgetMonth;             
+    return targetAmount.value/appData.budgetMonth;             
     },
     getStatusIncome: function(){
         if (appData.budgetDay>=1200){
@@ -177,7 +181,35 @@ let appData ={
         periodSelect.addEventListener('input', ()=>{
             periodAmount.textContent = periodSelect.value;
         });
-
+    },
+    validateInnput: function(callback){
+        let isValid;
+         // Считаем, только если в наименовании - р.букв,пробел,знак рпреп
+        for(let i = 0; i<nameInput.length; i++){
+            if (nameInput[i].value.match(/([а-яА-ЯЁ-ё ._?!@,-])+/g) || (nameInput[i].value.trim() === '')){
+                isValid = true;
+            }else {
+            //один раз выводим алерт
+            if (i < 3)
+                alert('"Наименование" может включать только русские буквы, пробелы и знаки препинания!');
+                isValid = false;
+            return;
+            }  
+        }
+        for(let i = 0; i<sumInput.length; i++){
+            if (isNumber(sumInput[i].value) || (sumInput[i].value.trim() === '')){
+                !isValid ? isValid : isValid;
+            }else {
+                //один раз выводим алерт
+                if (i < 4)
+                    alert('"Cумма" может включать только цифры!');
+                    isValid = false;    
+                return;             
+            }
+        }
+        if(isValid){
+            callback() ;
+        } else return;
     }
 };
 appData.showPeriod();
