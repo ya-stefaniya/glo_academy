@@ -190,7 +190,7 @@ let appData ={
                 isValid = true;
             }else {
             //один раз выводим алерт
-            if (i < 3)
+            if (i < nameInput.length)
                 alert('"Наименование" может включать только русские буквы, пробелы и знаки препинания!');
                 isValid = false;
             return;
@@ -201,7 +201,7 @@ let appData ={
                 !isValid ? isValid : isValid;
             }else {
                 //один раз выводим алерт
-                if (i < 4)
+                if (i < sumInput.length)
                     alert('"Cумма" может включать только цифры!');
                     isValid = false;    
                 return;             
