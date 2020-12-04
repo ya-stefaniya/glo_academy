@@ -30,11 +30,7 @@ let calculateResult = document.getElementById('start'),
     depositAmount = document.querySelector('.deposit-amount'),
     depositPercent = document.querySelector('.deposit-percent'),
     periodSelect = document.querySelector('.period-select'),
-    periodAmount = document.querySelector('.period-amount'),
-
-    nameInput = document.querySelectorAll('[placeholder="Наименование"]'),
-    sumInput = document.querySelectorAll('[placeholder="Сумма"]');
-
+    periodAmount = document.querySelector('.period-amount');
 
 let isNumber = function (n){
     return !isNaN(parseInt(n)) && isFinite(n);
@@ -63,8 +59,7 @@ let appData ={
         appData.getBudget();
         appData.getAddExpenses();
         appData.getAddIncome();
-        // функция-обертка для проверки валидности
-        appData.validateInnput(appData.showResult);
+        appData.showResult();
     },
     showResult: function(){
         budgetMonthValue.value = appData.budgetMonth;
@@ -94,7 +89,7 @@ let appData ={
         expensesItems.forEach(function(item){
             let itemExpenses = item.querySelector('.expenses-title').value;
             let cashExpenses = item.querySelector('.expenses-amount').value;
-            if(itemExpenses !== '' && cashExpenses !== '' && isNumber(cashExpenses)){
+            if(itemExpenses !== '' && cashExpenses !== ''){
                 appData.expenses[itemExpenses] = +cashExpenses;
             }
         });
@@ -124,7 +119,7 @@ let appData ={
         incomeItems.forEach(function(item){
             let itemIncomes = item.querySelector('.income-title').value;
             let cashIncomes = item.querySelector('.income-amount').value;
-            if(itemIncomes !== '' && cashIncomes !== '' && isNumber(cashIncomes)){
+            if(itemIncomes !== '' && cashIncomes !== ''){
                 appData.income[itemIncomes] = +cashIncomes;
             }
         });
@@ -182,35 +177,6 @@ let appData ={
             periodAmount.textContent = periodSelect.value;
         });
     },
-    validateInnput: function(callback){
-        let isValid;
-         // Считаем, только если в наименовании - р.букв,пробел,знак рпреп
-        for(let i = 0; i<nameInput.length; i++){
-            if (nameInput[i].value.match(/([а-яА-ЯЁ-ё ._?!@,-])+/g) || (nameInput[i].value.trim() === '')){
-                isValid = true;
-            }else {
-            //один раз выводим алерт
-            if (i < nameInput.length)
-                alert('"Наименование" может включать только русские буквы, пробелы и знаки препинания!');
-                isValid = false;
-            return;
-            }  
-        }
-        for(let i = 0; i<sumInput.length; i++){
-            if (isNumber(sumInput[i].value) || (sumInput[i].value.trim() === '')){
-                !isValid ? isValid : isValid;
-            }else {
-                //один раз выводим алерт
-                if (i < sumInput.length)
-                    alert('"Cумма" может включать только цифры!');
-                    isValid = false;    
-                return;             
-            }
-        }
-        if(isValid){
-            callback() ;
-        } else return;
-    }
 };
 appData.showPeriod();
 calculateResult.addEventListener('click', ()=>{
@@ -222,7 +188,16 @@ calculateResult.addEventListener('click', ()=>{
 
     }
 });
-
+document.addEventListener('input', function(){
+    let nameInput = document.querySelectorAll('[placeholder="Наименование"]');
+    let sumInput = document.querySelectorAll('[placeholder="Сумма"]');
+    for(let i = 0; i<nameInput.length; i++){
+        nameInput[i].value =  nameInput[i].value.replace(/[^А-Яа-яЁё ._?!@,-]/g, '');
+    };
+    for(let i = 0; i<sumInput.length; i++){
+        sumInput[i].value =  sumInput[i].value.replace(/[^+\d]/g, '');
+    }
+});
 addExpenceButton.addEventListener('click', appData.addExpensesBlock);
 addIncomeButton.addEventListener('click', appData.addIncomesBlock);
 
