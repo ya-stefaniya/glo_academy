@@ -6,13 +6,11 @@ let greet = document.querySelector('.greet');
 let userData = [];
 let login;
 let password;
-let name;
 
 const render = function (){
     ul.textContent = '';
     userData.forEach((item)=>{
         const li = document.createElement('li');
-        const button = document.createElement('button');
         let i = userData.indexOf(item);
         li.innerHTML = `<span>Имя: ${userData[i].user_name}, Фамилия: ${userData[i].user_surname}, регистрация состоялась ${userData[i].date}</span>;      
         <button class="remove">Х</button>`; 
@@ -20,15 +18,17 @@ const render = function (){
 
         btnRemove = li.querySelector('.remove');
         btnRemove.addEventListener('click', () =>{
+            //находим индекс элемента
         let i = userData.indexOf(item);
         if(i>=0){
+            //удаляем один элемент начиная от i
             userData.splice(i,1);
         }
+            //обновляем локалку
         localStorage.setItem('user', JSON.stringify(userData));
         render(); 
         });
     });
-  
 }
 
 const setDate = function(){
@@ -43,6 +43,7 @@ const setDate = function(){
     };
     return regDate.toLocaleString("ru", options);
 };
+
 btnSignUp.addEventListener('click', (e)=>{
     e.preventDefault();
     while (true) {
