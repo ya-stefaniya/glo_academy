@@ -1,0 +1,8 @@
+.remove{
+    height: 2rem;
+    width: 2rem;
+    border-radius: 100%;
+    background-color: white;
+    outline: none;
+    cursor: pointer;
+}
