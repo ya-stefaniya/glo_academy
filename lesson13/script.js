@@ -210,6 +210,8 @@ calculateResult.addEventListener('click', ()=>{
         allInputs.forEach.call(allInputs, function(input){
             input.disabled = true;
         });
+        //период должен работать после блокировки левой части?
+        periodSelect.disabled = false;
 
         // и меняем содержимое кнопки
         calculateResult.textContent = 'Cбросить';
