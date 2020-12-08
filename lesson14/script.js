@@ -237,22 +237,10 @@ AppData.prototype.showPeriod = function(){
 
 
 AppData.prototype.eventListeners = function(){
-    const _this = this;
-
-    document.addEventListener('input', function(){
-        let nameInput = document.querySelectorAll('[placeholder="Наименование"]');
-        let sumInput = document.querySelectorAll('[placeholder="Сумма"]');
-        for(let i = 0; i<nameInput.length; i++){
-            nameInput[i].value =  nameInput[i].value.replace(/[^А-Яа-яЁё ._?!@,-]/g, '');
-        };
-        for(let i = 0; i<sumInput.length; i++){
-            sumInput[i].value =  sumInput[i].value.replace(/[^+\d]/g, '');
-        }
-    });
-
+ 
     addExpenceButton.addEventListener('click', this.addExpensesBlock);
     addIncomeButton.addEventListener('click', this.addIncomesBlock);
- 
+    const _this = this;
     calculateResult.addEventListener('click', function(){
         if(salaryAmount.value === ''){
             //если нет обязательной величины блок кнопки старт
@@ -291,6 +279,17 @@ appData.eventListeners()
 console.log('appData: ', appData);
 
 
+
+document.addEventListener('input', function(){
+    let nameInput = document.querySelectorAll('[placeholder="Наименование"]');
+    let sumInput = document.querySelectorAll('[placeholder="Сумма"]');
+    for(let i = 0; i<nameInput.length; i++){
+        nameInput[i].value =  nameInput[i].value.replace(/[^А-Яа-яЁё ._?!@,-]/g, '');
+    };
+    for(let i = 0; i<sumInput.length; i++){
+        sumInput[i].value =  sumInput[i].value.replace(/[^+\d]/g, '');
+    }
+});
 
 /*
 appData.showPeriod();
