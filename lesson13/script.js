@@ -60,6 +60,19 @@ let appData ={
         this.showResult();
     },
     reset: function(){
+        //обнуляю объект и другие значения
+        this.income = {};
+        this.incomeMonth = 0;
+        this.addIncome = [];
+        this.expenses = {};
+        this.addExpenses = [];
+        this.deposit = false;
+        this.percentDeposit = 0;
+        this.moneyDeposit = 0;
+        this.budget = 0;
+        this.budgetDay = 0;
+        this.budgetMonth = 0;
+        this.expensesMonth = 0;
         budgetMonthValue.value = 0;
         budgetDayValue.value = 0;
         expensesMonthValue.value = 0;
@@ -75,15 +88,22 @@ let appData ={
                 box.value = '';
                 box.disabled = false;
                 });
+            
             calculateResult.textContent = 'Рассчитать';
             //удаление добавленных через + строк с импутами
             for(let i=1; i < incomeItems.length; i++){
                 incomeItems[i].parentNode.removeChild(incomeItems[i]);
+               
             }
+            addIncomeButton.style = 'display:block';
             for(let i=1; i < expensesItems.length; i++){
                 expensesItems[i].parentNode.removeChild(expensesItems[i]);
+              
             }
-        
+            //Возращаем кнопку плюсик
+            addExpenceButton.style = 'display:block';
+            //Возвращаем range
+            periodSelect.value = '1';
     },
     showResult: function(){
         budgetMonthValue.value = this.budgetMonth;
