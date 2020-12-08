@@ -271,6 +271,16 @@ AppData.prototype.eventListeners = function(){
             
         }
     });
+    document.addEventListener('input', function(){
+        let nameInput = document.querySelectorAll('[placeholder="Наименование"]');
+        let sumInput = document.querySelectorAll('[placeholder="Сумма"]');
+        for(let i = 0; i<nameInput.length; i++){
+            nameInput[i].value =  nameInput[i].value.replace(/[^А-Яа-яЁё ._?!@,-]/g, '');
+        };
+        for(let i = 0; i<sumInput.length; i++){
+            sumInput[i].value =  sumInput[i].value.replace(/[^+\d]/g, '');
+        }
+    });
 
 };
 const appData = new AppData();
@@ -280,16 +290,7 @@ console.log('appData: ', appData);
 
 
 
-document.addEventListener('input', function(){
-    let nameInput = document.querySelectorAll('[placeholder="Наименование"]');
-    let sumInput = document.querySelectorAll('[placeholder="Сумма"]');
-    for(let i = 0; i<nameInput.length; i++){
-        nameInput[i].value =  nameInput[i].value.replace(/[^А-Яа-яЁё ._?!@,-]/g, '');
-    };
-    for(let i = 0; i<sumInput.length; i++){
-        sumInput[i].value =  sumInput[i].value.replace(/[^+\d]/g, '');
-    }
-});
+
 
 /*
 appData.showPeriod();
