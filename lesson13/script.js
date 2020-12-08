@@ -30,8 +30,7 @@ let calculateResult = document.getElementById('start'),
     depositPercent = document.querySelector('.deposit-percent'),
     periodSelect = document.querySelector('.period-select'),
     periodAmount = document.querySelector('.period-amount'),
-    inputs = document.querySelectorAll('input');
-
+    inputs = document.querySelectorAll('input') ;
 let isNumber = function (n){
     return !isNaN(parseInt(n)) && isFinite(n);
 };
@@ -71,6 +70,19 @@ let appData ={
         periodSelect.addEventListener('input', ()=>{
             incomePeriodValue.value = 1;
         }); 
+        let inputs = document.querySelectorAll('input');
+            inputs.forEach.call(inputs, function(box){
+                box.value = '';
+                box.disabled = false;
+                });
+            calculateResult.textContent = 'Рассчитать';
+            //удаление добавленных через + строк с импутами
+            for(let i=1; i < incomeItems.length; i++){
+                incomeItems[i].parentNode.removeChild(incomeItems[i]);
+            }
+            for(let i=1; i < expensesItems.length; i++){
+                expensesItems[i].parentNode.removeChild(expensesItems[i]);
+            }
         
     },
     showResult: function(){
@@ -96,6 +108,7 @@ let appData ={
         if(expensesItems.length === 3){
             addExpenceButton.style.display = 'none';
         }
+        
     },
     getExpenses: function(){
         expensesItems.forEach(function(item){
@@ -212,20 +225,11 @@ calculateResult.addEventListener('click', ()=>{
         });
         //период должен работать после блокировки левой части?
         periodSelect.disabled = false;
-
         // и меняем содержимое кнопки
         calculateResult.textContent = 'Cбросить';
-
-        //при нажатии еще раз очищаем все боксы слева
-        calculateResult.addEventListener('click', () =>{
-            //без этого не реагируют блоки созданные по +
-            let inputs = document.querySelectorAll('input');
-            inputs.forEach.call(inputs, function(box){
-                box.value = '';
-                box.disabled = false;
-                })
         //и вызываем reset(обнуление правой части)
-        appData.reset();
+        calculateResult.addEventListener('click', ()=>{
+            appData.reset();
         });
         
     }
