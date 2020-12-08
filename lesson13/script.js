@@ -91,18 +91,20 @@ let appData ={
             
             calculateResult.textContent = 'Рассчитать';
             //удаление добавленных через + строк с импутами
-            for(let i=1; i < incomeItems.length; i++){
-                incomeItems[i].parentNode.removeChild(incomeItems[i]);
-               
+            if(incomeItems.length > 1){
+                for(let i=1; i < incomeItems.length; i++){
+                    incomeItems[i].parentNode.removeChild(incomeItems[i]);
+                }
             }
-            addIncomeButton.style = 'display:block';
-            for(let i=1; i < expensesItems.length; i++){
-                expensesItems[i].parentNode.removeChild(expensesItems[i]);
-              
-            }
+            if(expensesItems.length > 1) {
+                addIncomeButton.style = 'display:block';
+                for(let i=1; i < expensesItems.length; i++){
+                    expensesItems[i].parentNode.removeChild(expensesItems[i]);
+                }
+            };
             //Возращаем кнопку плюсик
             addExpenceButton.style = 'display:block';
-            //Возвращаем range
+            //Возвращаем range на дефолт
             periodSelect.value = '1';
     },
     showResult: function(){
@@ -245,11 +247,17 @@ calculateResult.addEventListener('click', ()=>{
         });
         //период должен работать после блокировки левой части?
         periodSelect.disabled = false;
-        // и меняем содержимое кнопки
-        calculateResult.textContent = 'Cбросить';
+        let btnStart = document.getElementById('start');
+        let btnReset = document.getElementById('cancel');
+        btnStart.style = 'display:none';
+        btnReset.style = 'display:block';
+        // // и меняем содержимое кнопки
+        // calculateResult.textContent = 'Cбросить';
         //и вызываем reset(обнуление правой части)
-        calculateResult.addEventListener('click', ()=>{
+        btnReset.addEventListener('click', ()=>{
             appData.reset();
+            btnStart.style = 'display:block';
+            btnReset.style = 'display:none';
         });
         
     }
