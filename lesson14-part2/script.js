@@ -228,16 +228,12 @@ AppData.prototype.calcSavedMoney = function(){
     if(arguments.length == 1) return;
     return this.budgetMonth * periodSelect.value;
 };
-AppData.prototype.showPeriod = function(){
-    periodSelect.addEventListener('input', ()=>{
-        periodAmount.textContent = periodSelect.value;
-    });
-};
-
 
 
 AppData.prototype.eventListeners = function(){
- 
+    periodSelect.addEventListener('input', ()=>{
+        periodAmount.textContent = periodSelect.value;
+    });
     addExpenceButton.addEventListener('click', this.addExpensesBlock);
     addIncomeButton.addEventListener('click', this.addIncomesBlock);
     const _this = this;
