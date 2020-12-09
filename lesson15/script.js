@@ -1,33 +1,32 @@
 'use strict'
 
-let calculateResult = document.getElementById('start'),
-    addIncomeButton = document.getElementsByTagName('button')[0],
-    addExpenceButton = document.getElementsByTagName('button')[1],
-    depositCheck = document.querySelector('#deposit-check'),
-    additionalIncomeItem = document.querySelectorAll('.additional_income-item'), //Поля для ввода возможных доходов
-    budgetDayValue = document.getElementsByClassName('budget_day-value')[0],
-    budgetMonthValue = document.getElementsByClassName('budget_month-value')[0],
-    expensesDayValue = document.getElementsByClassName('expenses_day-value')[0],
-    expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0],
-    additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0],
-    additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0],
-    incomePeriodValue = document.getElementsByClassName('income_period-value')[0],
-    targetMonthValue = document.getElementsByClassName('target_month-value')[0],
-    salaryAmount = document.querySelector('.salary-amount'),
-    incomeTitle = document.querySelector('.income-title'),
-    incomeAmount = document.querySelector('.income-amount'),
-    incomeItems = document.querySelectorAll('.income-items'),
-    expensesTitle = document.querySelector('.expenses-title '),
-    expensesItems = document.querySelectorAll('.expenses-items'),
-    additionalExpensesItem = document.querySelector('.additional_expenses-item'),
-    targetAmount = document.querySelector('.target-amount'),
-    depositBank = document.querySelector('.deposit-bank'),
-    depositAmount = document.querySelector('.deposit-amount'),
-    depositPercent = document.querySelector('.deposit-percent'),
-    periodSelect = document.querySelector('.period-select'),
-    periodAmount = document.querySelector('.period-amount'),
-    inputs = document.querySelectorAll('input') ;
-
+const calculateResult = document.getElementById('start'); 
+const addIncomeButton = document.getElementsByTagName('button')[0]; 
+const addExpenceButton = document.getElementsByTagName('button')[1]; 
+const depositCheck = document.querySelector('#deposit-check'); 
+const additionalIncomeItem = document.querySelectorAll('.additional_income-item');  //Поля для ввода возможных доходов
+const budgetDayValue = document.getElementsByClassName('budget_day-value')[0]; 
+const budgetMonthValue = document.getElementsByClassName('budget_month-value')[0]; 
+const expensesDayValue = document.getElementsByClassName('expenses_day-value')[0]; 
+const expensesMonthValue = document.getElementsByClassName('expenses_month-value')[0]; 
+const additionalIncomeValue = document.getElementsByClassName('additional_income-value')[0]; 
+const additionalExpensesValue = document.getElementsByClassName('additional_expenses-value')[0]; 
+const incomePeriodValue = document.getElementsByClassName('income_period-value')[0]; 
+const targetMonthValue = document.getElementsByClassName('target_month-value')[0]; 
+const salaryAmount = document.querySelector('.salary-amount'); 
+const incomeTitle = document.querySelector('.income-title'); 
+const incomeAmount = document.querySelector('.income-amount'); 
+let incomeItems = document.querySelectorAll('.income-items'); 
+const expensesTitle = document.querySelector('.expenses-title '); 
+let expensesItems = document.querySelectorAll('.expenses-items'); 
+const additionalExpensesItem = document.querySelector('.additional_expenses-item'); 
+const targetAmount = document.querySelector('.target-amount'); 
+const depositBank = document.querySelector('.deposit-bank'); 
+const depositAmount = document.querySelector('.deposit-amount'); 
+const depositPercent = document.querySelector('.deposit-percent'); 
+const periodSelect = document.querySelector('.period-select'); 
+const periodAmount = document.querySelector('.period-amount'); 
+const inputs = document.querySelectorAll('input') ;
 let money;
 
 class AppData {
@@ -103,7 +102,7 @@ class AppData {
             addExpenceButton.style = 'display:block';
             //Возвращаем range на дефолт
             periodSelect.value = '1';
-    };
+    }
     showResult(){
         budgetMonthValue.value = this.budgetMonth;
         budgetDayValue.value = Math.ceil(this.budgetDay);
@@ -115,7 +114,7 @@ class AppData {
         periodSelect.addEventListener('input', () =>{
             incomePeriodValue.value = this.calcSavedMoney();
         });     
-    };
+    }
     addExpensesBlock(){
         const cloneExpensesItems = expensesItems[0].cloneNode(true);
         const elems = cloneExpensesItems.childNodes;
@@ -177,7 +176,7 @@ class AppData {
                 this.addIncome.push(itemValue);
             }
         });
-    };
+    }
     getExpensesMonth(){
         let sum = 0;
         if(arguments.length == 1) sum = 0; 
