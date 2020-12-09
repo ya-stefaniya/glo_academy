@@ -185,16 +185,16 @@ class AppData {
             this.expensesMonth = +sum;
         }
         return sum;
-    };
+    }
     getBudget(){
         if(arguments.length == 1) return;
         this.budgetMonth = this.budget + +this.incomeMonth - +this.getExpensesMonth();
         this.budgetDay = Math.floor(this.budgetMonth/30);
-    };
+    }
     getTargetMonth(){
     if(arguments.length == 1) return;
     return targetAmount.value/this.budgetMonth;             
-    };
+    }
     getStatusIncome(){
         if (this.budgetDay>=1200){
             console.log('У вас высокий уровень дохода');
@@ -203,7 +203,7 @@ class AppData {
         } else if (this.budgetDay>=0){
             console.log('У вас средний уровень дохода');
         } else  console.log('Что-то пошло не так');
-    };
+    }
     getInfoDeposit(){
         if(this.deposit){
             do{
@@ -213,13 +213,11 @@ class AppData {
                 this.moneyDeposit = prompt('Какая сумма депозита?', '1000');
             } while (this.moneyDeposit.trim() === '' || !isNumber(+this.moneyDeposit));
         }
-    };
+    }
     calcSavedMoney(){
         if(arguments.length == 1) return;
         return this.budgetMonth * periodSelect.value;
-    };
-    
-    
+    }  
     eventListeners(){
         periodSelect.addEventListener('input', ()=>{
             periodAmount.textContent = periodSelect.value;
@@ -267,7 +265,6 @@ class AppData {
             }
         });
     };
-
 };
 
 
