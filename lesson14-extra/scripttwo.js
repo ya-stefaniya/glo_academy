@@ -1,4 +1,3 @@
-
 function DomElement(selector, height, width, fontSize, bg, x){
     this.selector = selector;
     this.height = height;
@@ -22,8 +21,38 @@ function DomElement(selector, height, width, fontSize, bg, x){
         div.style.fontSize = this.fontSize;
     }
 };
-let blabla = new DomElement('.block', '30px', '300px','20px','#FF6F61');
-let lala = new DomElement('#block', '50px', '500px','40px','#6B5B95');
-blabla.newElement();
-lala.newElement();
 
+
+let square = new DomElement('.block', '100px', '100px','0px','green');
+    square.newElement();
+    
+
+document.addEventListener('DOMContentLoaded', () => {
+    let moveLeft = 10;
+    let moveBottom = 10;
+
+    let block = document.querySelectorAll('div')[0];
+
+    block.style.display = 'block'
+    block.style.position = 'absolute';
+    document.addEventListener('keydown', (e)=>{
+
+    if(e.key === 'ArrowDown'){
+        moveBottom += 10;
+        block.style.top = moveBottom + 'px';
+    }
+    if(e.key === 'ArrowUp'){
+        moveBottom -= 10;
+        block.style.top = moveBottom + 'px';
+    }
+    if(e.key === 'ArrowLeft'){
+        moveLeft -= 10;
+        block.style.left = moveLeft + 'px';
+    };
+    if(e.key === 'ArrowRight'){
+        moveLeft += 10;
+        block.style.left = moveLeft + 'px';
+    }
+    
+    });
+});
