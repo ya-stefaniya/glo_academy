@@ -155,6 +155,7 @@ class AppData {
             });
         }
     }
+    //универсальный метод для "Возможный доход" и "Возможные расходы" 
     getExpInc(){
         let count = (item) =>{
             const startStr = item.className.split('-')[0]; //expenses/income
@@ -266,14 +267,11 @@ class AppData {
     };
 };
 
-
-
 const appData = new AppData();
 appData.eventListeners()
 
 //console.log('appData: ', appData);
 
-console.log('additionalExpensesItem: ', additionalExpensesItem);
 
 
 
