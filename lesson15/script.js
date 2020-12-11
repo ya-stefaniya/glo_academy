@@ -71,6 +71,7 @@ class AppData {
         this.budgetDay = 0;
         this.budgetMonth = 0;
         this.expensesMonth = 0;
+        depositCheck.checked = false
         budgetMonthValue.value = 0;
         budgetDayValue.value = 0;
         expensesMonthValue.value = 0;
@@ -217,7 +218,9 @@ class AppData {
             valueSelect = depositPercent.value;
             
         } else {
+            depositPercent.style.display = 'none';
             depositPercent.value = valueSelect;
+
         }
     }
     depositHandler(){
@@ -238,9 +241,9 @@ class AppData {
             depositAmount.style.display = 'none';
             depositBank.style.display = 'none';
             depositPercent.style.display = 'none';
-
             depositAmount.value = '';
             depositBank.value = '';
+            depositPercent.value = '' ;
             this.deposit = false;
             depositBank.removeEventListener('change', this.changePercent);
 
