@@ -47,8 +47,7 @@ class AppData {
     }
     start(){
         this.budget = +salaryAmount.value;
-        // this.getExpenses();
-        // this.getIncomes();
+        this.getInfoDeposit();
         this.getExpInc();
         this.getExpensesMonth();
         this.getBudget();
@@ -183,8 +182,9 @@ class AppData {
         return sum;
     }
     getBudget(){
+        const monthDeposit = this.moneyDeposit * (this.percentDeposit / 100);
         if(arguments.length == 1) return;
-        this.budgetMonth = this.budget + +this.incomeMonth - +this.getExpensesMonth();
+        this.budgetMonth = this.budget + +this.incomeMonth - +this.getExpensesMonth() + monthDeposit;
         this.budgetDay = Math.floor(this.budgetMonth/30);
     }
     getTargetMonth(){
@@ -200,20 +200,54 @@ class AppData {
             console.log('У вас средний уровень дохода');
         } else  console.log('Что-то пошло не так');
     }
-    getInfoDeposit(){
-        if(this.deposit){
-            do{
-                this.percentDeposit = prompt('Какой годовой процент в банке?', '10');
-            } while (this.percentDeposit.trim() === '' || !isNumber(+this.percentDeposit));
-            do{
-                this.moneyDeposit = prompt('Какая сумма депозита?', '1000');
-            } while (this.moneyDeposit.trim() === '' || !isNumber(+this.moneyDeposit));
-        }
-    }
     calcSavedMoney(){
         if(arguments.length == 1) return;
         return this.budgetMonth * periodSelect.value;
     }  
+    getInfoDeposit(){
+        if(this.deposit){
+            this.percentDeposit = depositPercent.value;
+            this.moneyDeposit = depositAmount.value;
+        }
+            
+    }
+    changePercent(){
+        let valueSelect = this.value;
+        if(valueSelect === 'other'){
+            valueSelect = depositPercent.value;
+            
+        } else {
+            depositPercent.value = valueSelect;
+        }
+    }
+    depositHandler(){
+        if(depositCheck.checked){
+            depositAmount.style.display = 'inline-block';
+            depositBank.style.display = 'inline-block';
+            depositPercent.style.display = 'inline-block';
+            depositPercent.addEventListener('input', () => {
+                if(+depositPercent.value > 100){
+                    alert('Значение не может быть больше 100');
+                    depositPercent.value = '';
+                }
+            });
+            this.deposit = true;
+            depositBank.addEventListener('change', this.changePercent);
+
+        } else {
+            depositAmount.style.display = 'none';
+            depositBank.style.display = 'none';
+            depositPercent.style.display = 'none';
+
+            depositAmount.value = '';
+            depositBank.value = '';
+            this.deposit = false;
+            depositBank.removeEventListener('change', this.changePercent);
+
+
+
+        }
+    }
     eventListeners(){
         periodSelect.addEventListener('input', ()=>{
             periodAmount.textContent = periodSelect.value;
@@ -224,6 +258,7 @@ class AppData {
         addincomeButton.addEventListener('click',  ()=>{
             this.getIncomeExpBlock(incomeItems)
         });
+        depositCheck.addEventListener('change', this.depositHandler.bind(this));
         calculateResult.addEventListener('click', () => {
             if(salaryAmount.value === ''){
                 //если нет обязательной величины блок кнопки старт
@@ -254,9 +289,12 @@ class AppData {
                 
             }
         });
+        
         document.addEventListener('input', () => {
             const nameInput = document.querySelectorAll('[placeholder="Наименование"]');
             const sumInput = document.querySelectorAll('[placeholder="Сумма"]');
+            const depositInput = document.querySelector('[placeholder="Процент"]');
+            depositInput.value = depositInput.value.replace(/[^+\d]/g, '');
             for(let i = 0; i<nameInput.length; i++){
                 nameInput[i].value =  nameInput[i].value.replace(/[^А-Яа-яЁё ._?!@,-]/g, '');
             };
