@@ -235,8 +235,7 @@ class AppData {
                 }
             });
             this.deposit = true;
-            depositBank.addEventListener('change', this.changePercent);
-
+            depositBank.addEventListener('change', this.changePercent)
         } else {
             depositAmount.style.display = 'none';
             depositBank.style.display = 'none';
@@ -246,9 +245,6 @@ class AppData {
             depositPercent.value = '' ;
             this.deposit = false;
             depositBank.removeEventListener('change', this.changePercent);
-
-
-
         }
     }
     eventListeners(){
