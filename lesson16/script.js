@@ -297,7 +297,7 @@ class AppData {
             const nameInput = document.querySelectorAll('[placeholder="Наименование"]');
             const sumInput = document.querySelectorAll('[placeholder="Сумма"]');
             const depositInput = document.querySelector('[placeholder="Процент"]');
-            depositInput.value = depositInput.value.replace(/[^+\d]/g, '');
+            depositInput.value = depositInput.value.replace(/[^1-9]/g, '');
             for(let i = 0; i<nameInput.length; i++){
                 nameInput[i].value =  nameInput[i].value.replace(/[^А-Яа-яЁё ._?!@,-]/g, '');
             };
