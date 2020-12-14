@@ -1,0 +1,32 @@
+body{
+    background: url("../task-two/1.jpg");
+}
+.fulldate{
+    color: white;
+    margin: 10rem auto;
+    width: 40rem;
+    font-family: 'Quicksand', sans-serif;
+    text-align: center;
+    /* text-shadow:  0 0 1em white; */
+      -webkit-text-stroke-width: 1px;
+      -webkit-text-stroke-color: black;
+    border-radius: 10px;
+    background-color: rgba(75, 69, 69, 0.2);
+    box-shadow: 0 0 15px 10px rgba(255, 255, 255, 0.2);
+}
+.greet{
+    padding-bottom: 1.1rem ;
+    font-size: 45px;
+}
+.week_day{
+    padding-bottom: 0.8rem ;
+    font-size: 30px;
+}
+.time{
+    padding-bottom: 1.5rem ;
+    font-size: 35px;
+}
+.new_year{
+    font-size: 35px;
+    padding-bottom: 1rem;
+}
