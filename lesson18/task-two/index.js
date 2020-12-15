@@ -1,6 +1,5 @@
 /* eslint-disable no-undef */
 let days = ["Понедельник", "Вторник", "Среда", "Четверг", "Пятница", "Суббота ", "Воскресенье"];
-const fulldate = document.querySelector('.fulldate');
 const weekDayText = document.querySelector('.week_day');
 const greetText = document.querySelector('.greet');
 const timeText = document.querySelector('.time');
@@ -40,7 +39,6 @@ showTime = () => {
     newYearText.textContent = `До нового года осталось ${daysToDeadline} дней!`;
 
     setTimeout(showTime, 1000);
- 
 };
 
 //Run
