@@ -89,22 +89,34 @@ togglePopUp();
 
 //плавный скролл
 const scrollBtn = document.querySelector('main>a');
-const menu = document.querySelector("menu");
-const links = menu.querySelectorAll("ul>li>a");
-
+console.log('scrollBtn: ', scrollBtn);
+const links = document.querySelectorAll(".active-menu ul li a");
+    console.log('links: ', links);
 scrollBtn.addEventListener("click", clickHandler);
-for (const link of links) {
-    link.addEventListener("click", clickHandler);
-}
-
 function clickHandler(e) {
     e.preventDefault();
-    const href = this.getAttribute("href");
-    console.log('this: ', this);
-    const offsetTop = document.querySelector(href).offsetTop;
+    const offsetTop = document.querySelector('.service').offsetTop;
     scroll({
         top: offsetTop,
         behavior: "smooth"
     });
 }
+
+
+// for (const link of links) {
+//     link.addEventListener("click", clickHandlerMenu);
+// }
+
+
+// function clickHandlerMenu(e) {
+//     e.preventDefault();
+//     const href = this.getAttribute("href");
+//     console.log('this: ', this);
+//     const offsetTop = document.querySelector(href).offsetTop;
+   
+//     scroll({
+//       top: offsetTop,
+//       behavior: "smooth"
+//     });
+//   }
 
