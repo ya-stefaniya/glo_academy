@@ -180,6 +180,7 @@ const slider = () => {
     };
 //действие для следующего нового слайда 
     const nextSlide = (elem, index, strClass) =>{
+        //без этого костыля не листает вперед после последнего слайда
         if(elem.length == currentSlide){
             index = 0;
             currentSlide = 0
