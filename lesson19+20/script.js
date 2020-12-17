@@ -12,7 +12,6 @@ window.addEventListener('DOMContentLoaded', () => {
             const minutes = Math.floor((timeRemaining / 60) % 60);
             const hours = Math.floor((timeRemaining / 60) / 60);
             return {
-                // days,
                 hours,
                 minutes,
                 seconds
