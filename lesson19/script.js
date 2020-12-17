@@ -86,15 +86,13 @@ const togglePopUp = () => {
         }
     };
     popupBtn.forEach(elem => {
-        
-            elem.addEventListener('click', () => {
-                popup.style.display = 'block';
-                if (document.documentElement.clientWidth > 768){
-                opacity = 0;
-                fadeIn();
-                }
-            });
-        
+        elem.addEventListener('click', () => {
+            popup.style.display = 'block';
+            if (document.documentElement.clientWidth > 768){
+            opacity = 0;
+            fadeIn();
+            }
+        });
     });
     popupClose.addEventListener('click', () => {
         popup.style.display = 'none';
