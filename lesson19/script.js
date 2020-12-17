@@ -89,6 +89,7 @@ const togglePopUp = () => {
         
             elem.addEventListener('click', () => {
                 popup.style.display = 'block';
+                //анимация только для экранов > 768
                 if (document.documentElement.clientWidth > 768){
                 opacity = 0;
                 fadeIn();
