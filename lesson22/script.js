@@ -110,6 +110,7 @@ class Todo {
     }
     init(){
     //есть ивент=> свой  this
+    this.form.addEventListener( "click" , () => alert('Нельзя оставлять строку пустой!'));
     this.form.addEventListener('submit', this.addTodo.bind(this));
     this.render();    
     }
