@@ -310,7 +310,19 @@ const calculatorHandler = (price = 100) => {
         } else {
             total === 0;
         }
-        calcTotal.textContent = Math.floor(total);
+        const animateTotal = (start, end, duration) => {
+            let startTime = null;
+            const step = (time) => {
+            if (!startTime) startTime = time;
+                const progress = Math.min((time - startTime) / duration, 1);
+                calcTotal.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+        animateTotal(0, total, 1500);
     };
 
     calcBlock.addEventListener('change', (e) => {
