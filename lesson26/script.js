@@ -338,7 +338,7 @@ calculatorHandler(100);
 
 const sendForm = () => {
     const errorMessage = 'Что-то пошло не так';
-    const loadMessage = ' Загрузка';
+   // const loadMessage = ' Загрузка';
     const successMessage = 'Спасибо! Мы с вами скоро свяжемся!';
     const form = document.querySelectorAll('form');
 
@@ -361,8 +361,21 @@ const sendForm = () => {
     [...form].forEach((item)=>{
         item.addEventListener('submit', (event) => {
             event.preventDefault();
-            item.appendChild(statusMessage);
-            statusMessage.textContent = loadMessage;
+            item.append(statusMessage);
+            statusMessage.textContent = ''
+
+            
+            //добавляем спиннер на стр
+            const loader = document.createElement('div');
+            loader.classList.add('sk-three-bounce');
+            const dot = document.createElement('div');
+            dot.classList.add('sk-bounce-dot');
+            loader.appendChild(dot);
+            let dot2 = dot.cloneNode(true);
+            let dot3 = dot.cloneNode(true);
+            item.appendChild(loader);
+            loader.appendChild(dot2);
+            loader.appendChild(dot3);
             const formData = new FormData(item);
             let body = {};
             formData.forEach((val,key) => {
@@ -370,6 +383,7 @@ const sendForm = () => {
             })
             postData(body, 
                 ()=>{
+                loader.remove();
                 statusMessage.textContent = successMessage;
                 },
                 (error) => {
