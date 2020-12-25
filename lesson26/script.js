@@ -35,7 +35,7 @@ window.addEventListener('DOMContentLoaded', () => {
         updateClock();
         setInterval(updateClock, 1000);
     }
-    showTime('23 december 2020 19:00');
+    showTime('25 december 2020 19:00');
 });
 //меню
 const toggleMenu = () => {
@@ -84,7 +84,7 @@ const togglePopUp = () => {
         }
     };
     popupBtn.forEach(elem => {
-        
+            //sendForm();
             elem.addEventListener('click', () => {
                 popup.style.display = 'block';
                 //анимация только для экранов > 768
@@ -310,19 +310,19 @@ const calculatorHandler = (price = 100) => {
         } else {
             total === 0;
         }
-        const animateTotal = (start, end, duration) => {
+        const animateTotal = (end, duration) => {
             let startTime = null;
             const step = (time) => {
             if (!startTime) startTime = time;
                 const progress = Math.min((time - startTime) / duration, 1);
-                calcTotal.textContent = Math.floor(progress * (end - start) + start);
+                calcTotal.textContent = Math.floor(progress * (end - 0) + 0);
                 if (progress < 1) {
                     window.requestAnimationFrame(step);
                 }
             };
             window.requestAnimationFrame(step);
         }
-        animateTotal(0, total, 1500);
+        animateTotal(total, 1500);
     };
 
     calcBlock.addEventListener('change', (e) => {
@@ -334,3 +334,69 @@ const calculatorHandler = (price = 100) => {
 };
 calculatorHandler(100);
 
+// send ajax form
+
+const sendForm = () => {
+    const errorMessage = 'Что-то пошло не так';
+    const loadMessage = ' Загрузка';
+    const successMessage = 'Спасибо! Мы с вами скоро свяжемся!';
+    const form = document.querySelectorAll('form');
+
+    const statusMessage = document.createElement('div');
+    statusMessage.style.cssText = 'font-size:2rem';
+    statusMessage.style.color = 'white';
+
+  //валидация
+    const nameForm = document.querySelectorAll('.form-name');
+        [...nameForm].forEach((form)=>{
+            form.addEventListener('input', ()=> {
+            form.value = form.value.replace(/[^а-я ]/gi, '');
+            });
+        });
+    const textForm = document.getElementById('form2-message');
+        textForm.addEventListener('input', ()=> {
+        textForm.value = textForm.value.replace(/[^а-я\d._^%$#!~@,-]/gi, '');
+    });
+
+    [...form].forEach((item)=>{
+        item.addEventListener('submit', (event) => {
+            event.preventDefault();
+            item.appendChild(statusMessage);
+            statusMessage.textContent = loadMessage;
+            const formData = new FormData(item);
+            let body = {};
+            formData.forEach((val,key) => {
+                body[key] = val;
+            })
+            postData(body, 
+                ()=>{
+                statusMessage.textContent = successMessage;
+                },
+                (error) => {
+                console.error(error);
+                statusMessage.textContent = errorMessage;
+            });
+            item.reset();
+        });
+        
+    });
+
+    const postData = (body, callback, errorData)=>{
+        const request = new XMLHttpRequest();
+        request.addEventListener('readystatechange', ()=>{
+            if(request.readyState !== 4){
+                return;
+            }
+            if(request.status === 200){
+                callback();
+            } else {
+                errorData(request.status)
+            }
+        });
+        request.open('POST', './server.php');
+        request.setRequestHeader('Content-Type', 'application/json');
+        
+        request.send(JSON.stringify(body));
+    }
+}
+sendForm();
