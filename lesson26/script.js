@@ -388,8 +388,12 @@ const sendForm = () => {
                 },
                 (error) => {
                 console.error(error);
-                loader.remove();
-                statusMessage.textContent = errorMessage;
+                
+                setTimeout(()=>{
+                    loader.remove();
+                    statusMessage.textContent = errorMessage;
+                }, 1500);
+               
             });
             item.reset();
         });
