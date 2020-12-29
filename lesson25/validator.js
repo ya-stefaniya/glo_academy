@@ -15,6 +15,11 @@ class Validator{
         //уникальная коллекция
         this.error = new Set();
     }
+    init(){
+        this.applyStyle();
+        this.setPattern();
+        this.elementsForm.forEach(elem=> elem.addEventListener('change', this.checkIt.bind(this)));
+    }
     isValid(elem){
         const validadorMethod = {
             notEmpty(elem){
@@ -32,11 +37,10 @@ class Validator{
         элементы принимает на чендж а методы
         хранятся в константе метод
         */
-        const method = this.method[elem.id];
-        if(method){
-            return method.every(item => validadorMethod[item[0]](elem, this.pattern[item[1]])
-
-            ); 
+        
+        if(this.method){
+            const method = this.method[elem.id];
+            return method.every(item => validadorMethod[item[0]](elem, this.pattern[item[1]])); 
         }
 
         return true;
@@ -52,21 +56,13 @@ class Validator{
             this.showError(target)
             this.error.add(target);
         }
-        console.log('this.error: ', this.error);
+        console.error(this.error);
 
-    }
-    init(){
-        this.applyStyle();
-        this.setPattern();
-        this.elementsForm.forEach(elem=> elem.addEventListener('change', this.checkIt.bind(this)));
     }
     showError(elem){
         elem.classList.remove('success');
         elem.classList.add('error');
         //если повторная неуспешная валидация текст только один раз
-        console.log('elem.nextElementSibling: ', elem.nextElementSibling);
-        console.log('elem', elem);
-
         if(elem.nextElementSibling && elem.nextElementSibling.classList.contains("validator-error")) return;
     
         const errorDiv = document.createElement('div');
@@ -85,23 +81,32 @@ class Validator{
     applyStyle(){
         const style = document.createElement('style');
         style.textContent = `
-        input.success{
-            border: 1px solid green;
+        input.success {
+               
+            border:1px solid green;
+            border-radius:3px;
         }
-        input.error{
-            border: 1px solid red;
+        input.error {
+            box-shadow: 0px 0px 3px 0px rgba(255,0,0,1);
+            border:1px solid red;
+            border-radius:3px;
         }
         .validator-error{
-            font-size: 12px;
+            font-size:14px;
+            color:red;
             font-family: sans-serif;
-            color: red;
+            margin-bottom:7px;
         }
-        `;
+    `;
         document.head.appendChild(style);
     }
     setPattern(){
         if(!this.pattern.phone){
-            this.pattern.phone = /^(\+375|80)(29|25|44|33)(\d{7})$/;
+            //this.pattern.phone = /^(\+375|80)(29|25|44|33)(\d{7})$/;
+            this.pattern.phone =  /^\+?\d{8,16}$/;
+        }
+        if(!this.pattern.name){
+            this.pattern.name =  /^([а-я])+$/gi;
         }
         if(!this.pattern.email){
             this.pattern.email = /^\w+@\w+.\w{2,3}$/;

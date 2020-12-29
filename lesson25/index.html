@@ -428,7 +428,6 @@
 const valid1 = new Validator({
     selector: '#form1',
     pattern: {
-	name: /([а-я])+/gi
     },
     method: {
         'form1-phone':[
@@ -450,7 +449,7 @@ const valid1 = new Validator({
 const valid2 = new Validator({
     selector: '#form2',
     pattern: {
-	name: /([а-я])+/gi,
+	name: /^[а-я]*$/gi,
 	message: /([а-я])+/gi,
     },
     method: {
