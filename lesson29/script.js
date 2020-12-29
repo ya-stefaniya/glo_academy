@@ -337,9 +337,9 @@ calculatorHandler(100);
 // send ajax form
 
 const sendForm = () => {
-   // const errorMessage = 'Что-то пошло не так';
+    const errorMessage = 'Что-то пошло не так';
    // const loadMessage = ' Загрузка';
-   // const successMessage = 'Спасибо! Мы с вами скоро свяжемся!';
+    const successMessage = 'Спасибо! Мы с вами скоро свяжемся!';
     const form = document.querySelectorAll('form');
 
     const statusMessage = document.createElement('div');
@@ -386,14 +386,14 @@ const sendForm = () => {
                         throw new Error('status network not 200')
                     }
                 loader.remove();
-                statusMessage.textContent = 'hdhdhd';
+                statusMessage.textContent = successMessage;
                 console.log(response);
                 })                
                 .catch((error) => {
                 console.error(error);
                 setTimeout(()=>{
                     loader.remove();
-                    statusMessage.textContent = 'errorMessage';
+                    statusMessage.textContent = errorMessage;
                 }, 1500);
             });
             item.reset();
