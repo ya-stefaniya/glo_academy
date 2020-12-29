@@ -413,7 +413,7 @@ const sendForm = () => {
 }
 sendForm();
 
-
+//промисы и XMLHttpRequest
 /**
  * new Promise((resolve, reject)=>{
             const request = new XMLHttpRequest();
