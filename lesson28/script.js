@@ -381,14 +381,13 @@ const sendForm = () => {
             formData.forEach((val,key) => {
                 body[key] = val;
             })
-            postData(body, 
-                ()=>{
+            postData(body)
+                .then(()=>{
                 loader.remove();
                 statusMessage.textContent = successMessage;
-                },
-                (error) => {
+                })                
+                .catch((error) => {
                 console.error(error);
-                
                 setTimeout(()=>{
                     loader.remove();
                     statusMessage.textContent = errorMessage;
@@ -400,22 +399,24 @@ const sendForm = () => {
         
     });
 
-    const postData = (body, callback, errorData)=>{
-        const request = new XMLHttpRequest();
-        request.addEventListener('readystatechange', ()=>{
-            if(request.readyState !== 4){
-                return;
-            }
-            if(request.status === 200){
-                callback();
-            } else {
-                errorData(request.status)
-            }
+    const postData = (body)=>{
+        return new Promise((resolve, reject)=>{
+            const request = new XMLHttpRequest();
+            request.addEventListener('readystatechange', ()=>{
+                if(request.readyState !== 4){
+                    return;
+                }
+                if(request.status === 200){
+                    resolve();
+                } else {
+                    reject(request.status)
+                }
+            });
+            request.open('POST', './server.php');
+            request.setRequestHeader('Content-Type', 'application/json');
+            
+            request.send(JSON.stringify(body));
         });
-        request.open('POST', './server.php');
-        request.setRequestHeader('Content-Type', 'application/json');
-        
-        request.send(JSON.stringify(body));
     }
 }
 sendForm();

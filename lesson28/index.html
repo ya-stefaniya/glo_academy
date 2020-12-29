@@ -17,7 +17,7 @@
 	<meta name="msapplication-TileColor" content="#b91d47">
 	<meta name="theme-color" content="#ffffff">
 	<script src="script.js" defer></script>
-	<!-- <script src="maskPhone.js" defer></script> -->
+	<script src="maskPhone.js" defer></script>
 
 </head>
 
@@ -423,81 +423,4 @@
 </div>
 
 </body>
-<script src="validator.js"></script>
-<script>
-const valid1 = new Validator({
-    selector: '#form1',
-    pattern: {
-    },
-    method: {
-        'form1-phone':[
-		//чтобы пройти валадцию должно быть не пустым
-			['notEmpty'],
-		//проверяет поле по опр паттерну
-			['pattern', 'phone']
-        ],
-        'form1-email':[
-			['notEmpty'],
-			['pattern', 'email']
-		],
-		'form1-name':[
-            ['notEmpty'],
-            ['pattern', 'name']
-        ],
-    }
-});
-const valid2 = new Validator({
-    selector: '#form2',
-    pattern: {
-	name: /^[а-я]*$/gi,
-	message: /([а-я])+/gi,
-    },
-    method: {
-        'form2-phone':[
-		//чтобы пройти валадцию должно быть не пустым
-			['notEmpty'],
-		//проверяет поле по опр паттерну
-			['pattern', 'phone']
-        ],
-        'form2-email':[
-			['notEmpty'],
-			['pattern', 'email']
-		],
-		'form2-name':[
-            ['notEmpty'],
-            ['pattern', 'name']
-		],
-		'form2-message':[
-            ['notEmpty'],
-            ['pattern', 'message']
-        ],
-    }
-});
-const valid3 = new Validator({
-    selector: '#form3',
-    pattern: {
-	name: /([а-я])+/gi
-    //    zip: /\d{5,6}/
-    },
-    method: {
-        'form3-phone':[
-            //чтобы пройти валадцию должно быть не пустым
-            ['notEmpty'],
-            //проверяет поле по опр паттерну
-            ['pattern', 'phone']
-        ],
-        'form3-email':[
-        ['notEmpty'],
-        ['pattern', 'email']
-		],
-		'form3-name':[
-            ['notEmpty'],
-            ['pattern', 'name']
-        ],
-    }
-});
-valid1.init();
-valid2.init();
-valid3.init();
-</script>
 </html>
