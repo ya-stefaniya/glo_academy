@@ -1,6 +1,5 @@
 const sendForm = () => {
     const errorMessage = 'Что-то пошло не так';
-   // const loadMessage = ' Загрузка';
     const successMessage = 'Спасибо! Мы с вами скоро свяжемся!';
     const form = document.querySelectorAll('form');
 
@@ -9,16 +8,16 @@ const sendForm = () => {
     statusMessage.style.color = 'white';
 
   //валидация
-    // const nameForm = document.querySelectorAll('.form-name');
-    //     [...nameForm].forEach((form)=>{
-    //         form.addEventListener('input', ()=> {
-    //         form.value = form.value.replace(/[^а-я ]/gi, '');
-    //         });
-    //     });
-    // const textForm = document.getElementById('form2-message');
-    //     textForm.addEventListener('input', ()=> {
-    //     textForm.value = textForm.value.replace(/[^а-я\d._^%$#!~@,-]/gi, '');
-    // });
+    const nameForm = document.querySelectorAll('.form-name');
+        [...nameForm].forEach((form)=>{
+            form.addEventListener('input', ()=> {
+            form.value = form.value.replace(/[^а-я ]/gi, '');
+            });
+        });
+    const textForm = document.getElementById('form2-message');
+        textForm.addEventListener('input', ()=> {
+        textForm.value = textForm.value.replace(/[^а-я\d._^%$#!~@,-]/gi, '');
+    });
 
     [...form].forEach((item)=>{
         item.addEventListener('submit', (event) => {
@@ -49,16 +48,21 @@ const sendForm = () => {
                     }
                 loader.remove();
                 statusMessage.textContent = successMessage;
-                console.log(response);
+                console.log('я тут');
+                setTimeout(()=>{
+                    console.log('я тут через 5 сек');
+                    statusMessage.textContent = '';
+                }, 5000);
                 })                
                 .catch((error) => {
                 console.error(error);
                 setTimeout(()=>{
                     loader.remove();
                     statusMessage.textContent = errorMessage;
-                }, 1500);
+                }, 1500);               
             });
             item.reset();
+           
         });
         
     });
