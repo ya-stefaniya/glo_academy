@@ -18,9 +18,14 @@ const sendForm = () => {
         textForm.addEventListener('input', ()=> {
         textForm.value = textForm.value.replace(/[^а-я\d._^%$#!~@,-]/gi, '');
     });
-
+    //проверяем наличие required в email
+    const emailForm = document.querySelectorAll('.form-email');
+    [...emailForm].forEach((item)=>{
+        !item.required ? item.required = true : item.required;
+    });
     [...form].forEach((item)=>{
         item.addEventListener('submit', (event) => {
+            
             event.preventDefault();
             item.append(statusMessage);
             statusMessage.textContent = ''
@@ -48,21 +53,18 @@ const sendForm = () => {
                     }
                 loader.remove();
                 statusMessage.textContent = successMessage;
-                console.log('я тут');
-                setTimeout(()=>{
-                    console.log('я тут через 5 сек');
-                    statusMessage.textContent = '';
-                }, 5000);
                 })                
                 .catch((error) => {
                 console.error(error);
                 setTimeout(()=>{
                     loader.remove();
                     statusMessage.textContent = errorMessage;
-                }, 1500);               
+                }, 1500);       
             });
             item.reset();
-           
+            setTimeout(()=>{
+                statusMessage.textContent = '';
+            }, 5000);
         });
         
     });
@@ -71,7 +73,6 @@ const sendForm = () => {
         return fetch('./server.php',{
             method: 'POST',
             headers: {
-         
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(body)
