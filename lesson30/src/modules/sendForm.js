@@ -11,12 +11,12 @@ const sendForm = () => {
     const nameForm = document.querySelectorAll('.form-name');
         [...nameForm].forEach((form)=>{
             form.addEventListener('input', ()=> {
-            form.value = form.value.replace(/[^а-я ]/gi, '');
+            form.value = form.value.replace(/[^а-я\s]/gi, '');
             });
         });
     const textForm = document.getElementById('form2-message');
         textForm.addEventListener('input', ()=> {
-        textForm.value = textForm.value.replace(/[^а-я\d._^%$#!~@,-]/gi, '');
+        textForm.value = textForm.value.replace(/[^а-яё\d\W]/gi, '');
     });
     //проверяем наличие required в email
     const emailForm = document.querySelectorAll('.form-email');
