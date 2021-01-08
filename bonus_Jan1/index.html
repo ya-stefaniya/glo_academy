@@ -1,0 +1,72 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Extra</title>
+</head>
+<body>
+        <ul>
+            <li>Добавление данных в таблицу</li>
+            <ul>
+                <li>Валидация данных (год и пробег - числа)</li>
+                <li>Запрет на добавление пустых блоков</li>
+            </ul>
+            <li>Фильтрация</li>
+            <ul>
+                <li>Фильтрация по каждому блоку отдельно</li>
+                <li>Поиск от начала слова</li>
+                <li>Смена индексов у отфильтрованных элементов</li>
+                <li>Disabled у других блоков фильтрации при наличии фильтра в фокусе</li>
+            </ul>
+            <li>Сортировка</li>
+            <ul>
+                <li>Для колонки со словами - по алфавиту</li>
+                <li>Для колонки с цифрами - в порядке возрастания</li>
+                <li>Для колонки со смешанными данными - по длине слов</li>
+            </ul>
+            
+        </ul>
+    <section class="info" style="margin: 3rem">
+        <form class="car-control>">
+            <p> Добавить в таблицу </p>
+            <input type="text" name="car" id="word" class="car" placeholder="Марка" >
+            <input type="text" name="model" class="model" placeholder="Модель">
+            <input type="text" name="year" id="number" class="year" placeholder="Год выпуска">
+            <input type="text" name="km" id="number" class="km" placeholder="Пробег">
+            <input type="submit" class="add" style="margin-left: 3rem" value="Добавить"></input>
+        </form>
+   
+    </section>
+    <section class="filter" style="margin: 3rem">
+        <p> Фильтрация </p>
+        <input type="text" class="car_filter" id="marka"placeholder="Марка">
+        <input type="text" class="model_filter"id="model" placeholder="Модель">
+        <input type="text" class="year_filter" id="year" placeholder="Год выпуска">
+        <input type="text" class="km_filter" id="km"placeholder="Пробег">
+    </section>
+    <section class="table-container" style="margin-top: 3rem">
+         <table class="table table-striped ">
+            <thead>
+            <tr>
+                <th scope="col" class="index"></th>
+                <th scope="col" id="marka">Марка</th>
+                <th scope="col" id="model">Модель</th>
+                <th scope="col" id="year">Год выпуска</th>
+                <th scope="col" id="km">Пробег</th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+            <!-- <tbody>
+            <tr>
+                <th scope="row">3</th>
+                <td>Opel</td>
+                <td>873</td>
+                <td>2008</td>
+                <td>100.000</td>
+            </tr>
+            </tbody> -->
+        </table>
+    </section>
+</body>
+<script src="main.js"></script>
+</html>
